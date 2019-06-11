@@ -6,13 +6,13 @@
 /*   By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 18:14:06 by jnaidoo           #+#    #+#             */
-/*   Updated: 2019/06/10 15:38:26 by jnaidoo          ###   ########.fr       */
+/*   Updated: 2019/06/11 12:53:05 by jnaidoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_next_line(char **a, char **line, int fd, int b)
+static int	ft_next_line(char **a, char **line, int fd)
 {
 	char	*c;
 	int		d;
@@ -31,8 +31,6 @@ static int	ft_next_line(char **a, char **line, int fd, int b)
 	}
 	else if (a[fd][d] == '\0')
 	{
-		if (b == BUFF_SIZE)
-			return (get_next_line(fd, line));
 		*line = ft_strdup(a[fd]);
 		ft_strdel(&a[fd]);
 	}
@@ -41,10 +39,10 @@ static int	ft_next_line(char **a, char **line, int fd, int b)
 
 int			get_next_line(const int fd, char **line)
 {
-	static char	*a[255];
-	char		buf[BUFF_SIZE + 1];
-	char		*b;
-	int			c;
+	static char		*a[100];
+	char			buf[BUFF_SIZE + 1];
+	char			*b;
+	int				c;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
@@ -63,5 +61,5 @@ int			get_next_line(const int fd, char **line)
 		return (-1);
 	else if (c == 0 && (a[fd] == NULL || a[fd][0] == '\0'))
 		return (0);
-	return (ft_next_line(a, line, fd, c));
+	return (ft_next_line(a, line, fd));
 }
