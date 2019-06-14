@@ -6,7 +6,7 @@
 /*   By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 12:26:30 by jnaidoo           #+#    #+#             */
-/*   Updated: 2019/05/31 12:40:15 by jnaidoo          ###   ########.fr       */
+/*   Updated: 2019/06/12 14:12:45 by jnaidoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	if (a > ft_strlen(s) || a + len > ft_strlen(s))
 	{
-		return (0);
+		return (NULL);
 	}
 	while (c < len)
 	{

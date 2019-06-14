@@ -6,7 +6,7 @@
 /*   By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 16:08:20 by jnaidoo           #+#    #+#             */
-/*   Updated: 2019/06/04 15:21:00 by jnaidoo          ###   ########.fr       */
+/*   Updated: 2019/06/13 08:27:45 by jnaidoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 	}
 	else
 	{
-		if (!(a->content = ft_strdup(content)))
+		if (!(a->content = ft_memalloc(content_size)))
 			return (NULL);
 		a->content_size = content_size;
+		ft_memcpy(a->content, content, content_size);
 	}
 	a->next = NULL;
 	return (a);

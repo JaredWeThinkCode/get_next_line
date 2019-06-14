@@ -6,14 +6,14 @@
 /*   By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 14:03:17 by jnaidoo           #+#    #+#             */
-/*   Updated: 2019/06/11 12:53:08 by jnaidoo          ###   ########.fr       */
+/*   Updated: 2019/06/14 08:20:26 by jnaidoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __GET_NEXT_LINE_H
 # define __GET_NEXT_LINE_H
 
-# define BUFF_SIZE 256
+# define BUFF_SIZE 32
 
 # include "libft/libft.h"
 # include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 11:28:29 by jnaidoo           #+#    #+#             */
-/*   Updated: 2019/05/28 11:30:39 by jnaidoo          ###   ########.fr       */
+/*   Updated: 2019/06/12 13:41:18 by jnaidoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*ft_strrev(char *s)
 	size_t	c;
 
 	b = ft_strlen(s);
-	a = ft_memalloc(b + 1);
+	if (!(a = ft_memalloc(b + 1)))
+		return (NULL);
 	c = 0;
 	while (c < ft_strlen(s))
 	{

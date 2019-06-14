@@ -6,13 +6,13 @@
 /*   By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/08 18:14:06 by jnaidoo           #+#    #+#             */
-/*   Updated: 2019/06/11 12:53:05 by jnaidoo          ###   ########.fr       */
+/*   Updated: 2019/06/14 08:21:01 by jnaidoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	ft_next_line(char **a, char **line, int fd)
+static int	ft_next_line(int fd, char **a, char **line)
 {
 	char	*c;
 	int		d;
@@ -26,8 +26,6 @@ static int	ft_next_line(char **a, char **line, int fd)
 		c = ft_strdup(a[fd] + d + 1);
 		free(a[fd]);
 		a[fd] = c;
-		if (a[fd][0] == '\0')
-			ft_strdel(&a[fd]);
 	}
 	else if (a[fd][d] == '\0')
 	{
@@ -39,27 +37,27 @@ static int	ft_next_line(char **a, char **line, int fd)
 
 int			get_next_line(const int fd, char **line)
 {
-	static char		*a[100];
-	char			buf[BUFF_SIZE + 1];
+	static char		*a[0];
+	char			buff[BUFF_SIZE + 1];
 	char			*b;
 	int				c;
 
 	if (fd < 0 || line == NULL)
 		return (-1);
-	while ((c = read(fd, buf, BUFF_SIZE)) > 0)
+	if (a[fd] == NULL)
+		a[fd] = ft_strnew(1);
+	while ((c = read(fd, buff, BUFF_SIZE)) > 0)
 	{
-		buf[c] = '\0';
-		if (a[fd] == NULL)
-			a[fd] = ft_strnew(1);
-		b = ft_strjoin(a[fd], buf);
+		buff[c] = '\0';
+		b = ft_strjoin(a[fd], buff);
 		free(a[fd]);
 		a[fd] = b;
-		if (ft_strchr(buf, '\n'))
+		if (ft_strchr(buff, '\n'))
 			break ;
 	}
 	if (c < 0)
 		return (-1);
-	else if (c == 0 && (a[fd] == NULL || a[fd][0] == '\0'))
+	else if (c == 0 && a[fd][0] == '\0')
 		return (0);
-	return (ft_next_line(a, line, fd));
+	return (ft_next_line(fd, a, line));
 }
