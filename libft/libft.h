@@ -6,18 +6,16 @@
 /*   By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 11:23:56 by jnaidoo           #+#    #+#             */
-/*   Updated: 2019/06/11 12:28:43 by jnaidoo          ###   ########.fr       */
+/*   Updated: 2019/06/21 13:23:13 by jnaidoo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef __LIBFT_H
 # define __LIBFT_H
 
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
-# include <ctype.h>
 
 typedef struct		s_list
 {

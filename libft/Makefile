@@ -6,7 +6,7 @@
 #    By: jnaidoo <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/31 15:13:34 by jnaidoo           #+#    #+#              #
-#    Updated: 2019/06/11 12:43:36 by jnaidoo          ###   ########.fr        #
+#    Updated: 2019/06/28 15:30:28 by jnaidoo          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,18 +25,7 @@ SRC = ft_memccpy.c ft_putnbr.c ft_striter.c ft_strnstr.c ft_memchr.c \
 	  ft_strnequ.c ft_memalloc.c ft_putendl_fd.c ft_strequ.c ft_strnew.c \
 	  ft_lstnew.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c ft_lstiter.c ft_lstmap.c
 
-OBJ = ft_memccpy.o ft_putnbr.o ft_striter.o ft_strnstr.o ft_memchr.o \
-	  ft_putnbr_fd.o ft_striteri.o ft_strrchr.o ft_memcmp.o \
-	  ft_putstr.o ft_strjoin.o ft_strrev.o ft_atoi.o ft_memcpy.o ft_putstr_fd.o \
-	  ft_strlcat.o ft_strsplit.o ft_bzero.o ft_memdel.o ft_capitalize.o \
-	  ft_strcat.o ft_strlen.o ft_strstr.o ft_isalnum.o ft_memmove.o ft_strchr.o \
-	  ft_strmap.o ft_strsub.o ft_isalpha.o ft_memset.o ft_islower.o ft_isupper.o \
-	  ft_strclr.o ft_strmapi.o ft_strtrim.o ft_isascii.o ft_nbrlen.o ft_strcmp.o \
-	  ft_strncat.o ft_tolower.o ft_isdigit.o ft_putchar.o ft_isspace.o \
-	  ft_strcpy.o ft_strncmp.o ft_toupper.o ft_isprint.o ft_putchar_fd.o \
-	  ft_strdel.o ft_strncpy.o ft_itoa.o ft_putendl.o ft_strdup.o \
-	  ft_strnequ.o ft_memalloc.o ft_putendl_fd.o ft_strequ.o ft_strnew.o \
-	  ft_lstnew.o ft_lstadd.o ft_lstdel.o ft_lstdelone.o ft_lstiter.o ft_lstmap.o
+OBJ = $(patsubst %.c, %.o, $(SRC)) 
 
 INCL = libft.h
 
@@ -44,10 +33,12 @@ TEST = -Wall -Werror -Wextra
 
 all: $(NAME)
 
-$(NAME):
-	gcc -c $(TEST) $(SRC)
+$(NAME): $(OBJ)
 	ar rv $(NAME) $(OBJ) $(INCL)
 	ranlib $(NAME)
+
+%.o: %.c
+	gcc -c $(TEST) -o $@ $<
 
 norm:
 	norminette
@@ -59,3 +50,9 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+program: $(NAME) main.c
+	gcc -o program main.c $(NAME)
+	./program
+
+.PHONY: re clean all fclean test
